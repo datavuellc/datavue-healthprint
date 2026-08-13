@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        @page {
+            size: Letter;
+            margin: 0.75in;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            color: #1f2937;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-size: 24pt;
+            color: #163b65;
+            margin-bottom: 6px;
+        }
+
+        h2 {
+            color: #163b65;
+            margin-top: 30px;
+        }
+
+        .member-box {
+            border: 1px solid #cbd5e1;
+            padding: 14px;
+            margin: 20px 0;
+            background: #f8fafc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #64748b;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #e2e8f0;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Annual Notice of Change</h1>
+
+<p>
+    <strong>{{ plan_name }}</strong><br>
+    Coverage Year {{ year }}
+</p>
+
+<div class="member-box">
+    <strong>Member:</strong> {{ member_name }}<br>
+    <strong>Member ID:</strong> {{ member_id }}<br>
+    <strong>Effective Date:</strong> {{ start_date }}
+</div>
+
+<p>
+    This notice describes important changes to your
+    {{ plan_name }} coverage for {{ year }}.
+</p>
+
+<h2>Changes to your coverage</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Location</th>
+            <th>Original Information</th>
+            <th>Corrected Information</th>
+            <th>What this means for you</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for change in changes %}
+        <tr>
+            <td>{{ change.page }}</td>
+            <td>{{ change.incorrect }}</td>
+            <td>{{ change.correct }}</td>
+            <td>{{ change.impact | default("") }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<p>
+    If you have questions, call {{ contact_number }}
+    or visit {{ website }}.
+</p>
+
+</body>
+</html>
